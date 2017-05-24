@@ -20,7 +20,7 @@ public class ImageViewDialog extends JDialog {
         label = new JLabel();
         add(label);
         label.setIcon(new ImageIcon("test.jpg"));
-        //setUndecorated(true);
+        setUndecorated(true);
     }
 
 //    public void updateLabel(byte[] imageBytes) {

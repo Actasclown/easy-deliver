@@ -25,7 +25,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<byte[]> {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, byte[] bytes) throws Exception {
         //bytes里面就是图片的数据。
         BufferedImage image = ImageUtil.bytesToImage(bytes);
-        Image tmp = image.getScaledInstance(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, Image.SCALE_DEFAULT);
-        imageViewDialog.updateLabel(ImageUtil.toBufferedImage(tmp));
+        //Image tmp = image.getScaledInstance(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, Image.SCALE_DEFAULT);
+        imageViewDialog.updateLabel(image);
     }
 }
