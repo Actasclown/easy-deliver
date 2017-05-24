@@ -89,7 +89,11 @@ public class HelloPage {
     public static void startClient() {
         ImageViewDialog jDialog = new ImageViewDialog();
         jDialog.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+
         jDialog.setVisible(true);
+
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        gd.setFullScreenWindow(jDialog);
 
         EasyDeliverClient client = new EasyDeliverClient("127.0.0.1", 8888, jDialog);
         client.connect();
