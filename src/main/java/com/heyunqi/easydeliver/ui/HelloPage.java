@@ -7,6 +7,8 @@ import com.heyunqi.easydeliver.util.ScreenCapture;
 import com.heyunqi.easydeliver.util.ThreadUtil;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -21,6 +23,8 @@ public class HelloPage {
     public static JDialog screenShow = null;
     public static BufferedImage receivedImage = null;
     public static BufferedImage sendedImage = null;
+
+    public static String sendIP = "10.1.54.199";
 
     public static void main(String[] args) {
 
@@ -56,8 +60,31 @@ public class HelloPage {
                 }
             }
         });
-        actAsServer.setBounds(75, 100, 80, 40);
+        actAsServer.setBounds(70, 90, 80, 40);
         helloPageContainer.add(actAsServer);
+
+        final JTextField ipInput = new JTextField(sendIP);
+        ipInput.setBounds(220, 60, 100, 40);
+        ipInput.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                sendIP = ipInput.getText();
+                System.out.println(sendIP);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                sendIP = ipInput.getText();
+                System.out.println(sendIP);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                sendIP = ipInput.getText();
+                System.out.println(sendIP);
+            }
+        });
+        helloPageContainer.add(ipInput);
 
         final JButton actAsClient = new JButton("接收");
         actAsClient.addActionListener(new AbstractAction() {
@@ -65,10 +92,10 @@ public class HelloPage {
                 startClient();
             }
         });
-        actAsClient.setBounds(225, 100, 80, 40);
+        actAsClient.setBounds(230, 110, 80, 40);
         helloPageContainer.add(actAsClient);
 
-        helloPage.setSize(400,300);
+        helloPage.setSize(400,280);
         helloPage.setVisible(true);
         helloPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -82,7 +109,7 @@ public class HelloPage {
         while(true) {
             byte[] bytes = ImageUtil.imageToBytes(sendedImage);
             server.sendToAll(bytes);
-            ThreadUtil.sleep(16);
+            ThreadUtil.sleep(500);
         }
     }
 
@@ -95,7 +122,7 @@ public class HelloPage {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         gd.setFullScreenWindow(jDialog);
 
-        EasyDeliverClient client = new EasyDeliverClient("127.0.0.1", 8888, jDialog);
+        EasyDeliverClient client = new EasyDeliverClient(sendIP, 8888, jDialog);
         client.connect();
     }
 }

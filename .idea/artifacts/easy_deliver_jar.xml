@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+<artifact type="jar" name="easy-deliver:jar">
+  <output-path>$PROJECT_DIR$/out/artifacts/easy_deliver_jar</output-path>
+  <root id="archive" name="easy-deliver.jar">
+    <element id="directory" name="META-INF">
+      <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+    </element>
+    <element id="module-output" name="easy-deliver" />
+    <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.11.Final/netty-all-4.1.11.Final.jar" path-in-jar="/" />
+  </root>
+</artifact>
+</component>
